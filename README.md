@@ -35,6 +35,6 @@ cd ~/mailer
 composer run-script start
 ```
   - Go to localhost:8080 (can be changed in composer.json)
-[http://localhost:8080](http://localhost:8080)
 
+  [http://localhost:8080](http://localhost:8080)
 
