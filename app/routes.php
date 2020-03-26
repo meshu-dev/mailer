@@ -7,6 +7,7 @@ use App\Controller\MailController;
 
 return function (App $app) {
 	$app->get('/', HomeController::class . ':index');
+	$app->get('/test', HomeController::class . ':test');
 	$app->post('/send', MailController::class . ':send');
 	$app->map(
 		['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],

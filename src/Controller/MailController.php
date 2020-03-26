@@ -17,24 +17,21 @@ class MailController
         $name = $params['name'] ?? null;
         $email = $params['email'] ?? null;
         $message = $params['message'] ?? null;
-
-        $mailer = $this->container->get('mailer');
+        $captchaToken = $params['captchaToken'] ?? null;
 
         $subject = getenv('MAIL_SUBJECT');
-        $fromEmail = getenv('MAIL_SENDER_EMAIL');
-        $fromName = getenv('MAIL_SENDER_NAME');
         $toEmail = getenv('MAIL_RECEIVER_EMAIL');
 
-        $mailMessage = $this->container->get('mailMessage');
-        $mailMessage->setSubject($subject)
-                    ->setFrom([$fromEmail => $fromName])
-                    ->setTo([$toEmail])
-                    ->setBody($message);
-
-        $result = $mailer->send($mailMessage);
+        $contactService = $this->container->get('ContactService');
+        $isSent = $contactService->sendEmail(
+            $subject,
+            $toEmail,
+            $message,
+            $captchaToken
+        );
 
         $response->getBody()->write(
-            json_encode(['isSent' => $result ? true : false])
+            json_encode(['isSent' => $isSent])
         );
         return $response;
     }

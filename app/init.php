@@ -34,6 +34,9 @@ $middleware($app);
 $routes = require __DIR__ . '/routes.php';
 $routes($app);
 
+$services = require __DIR__ . '/services.php';
+$services($app->getContainer());
+
 require __DIR__ . '/cors.php';
 
 $app->run();

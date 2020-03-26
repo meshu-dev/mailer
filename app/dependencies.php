@@ -20,5 +20,8 @@ return function (ContainerBuilder $containerBuilder) {
         'mailMessage' => function (ContainerInterface $c) {
             return new Swift_Message();
         },
+        'httpClient' => function() {
+            return new \GuzzleHttp\Client();
+        }
     ]);
 };
