@@ -3,12 +3,11 @@ use Slim\App;
 use Slim\Exception\HttpNotFoundException;
 
 use App\Controller\HomeController;
-use App\Controller\MailController;
+use App\Controller\ContactController;
 
 return function (App $app) {
 	$app->get('/', HomeController::class . ':index');
-	$app->get('/test', HomeController::class . ':test');
-	$app->post('/send', MailController::class . ':send');
+	$app->post('/send', ContactController::class . ':send');
 	$app->map(
 		['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
 		'/{routes:.+}',

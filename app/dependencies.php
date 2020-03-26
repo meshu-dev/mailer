@@ -13,15 +13,10 @@ return function (ContainerBuilder $containerBuilder) {
             $transport->setUsername(getenv('SWIFT_SMTP_USERNAME'));
             $transport->setPassword(getenv('SWIFT_SMTP_PASSWORD'));
 
-            $mailer = new Swift_Mailer($transport);
-
-            return $mailer;
+            return new Swift_Mailer($transport);
         },
         'mailMessage' => function (ContainerInterface $c) {
             return new Swift_Message();
-        },
-        'httpClient' => function() {
-            return new \GuzzleHttp\Client();
         }
     ]);
 };
