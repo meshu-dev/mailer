@@ -37,6 +37,9 @@ $routes($app);
 $services = require __DIR__ . '/services.php';
 $services($app->getContainer());
 
+$validators = require __DIR__ . '/validators.php';
+$validators($app->getContainer());
+
 require __DIR__ . '/cors.php';
 
 $app->run();
