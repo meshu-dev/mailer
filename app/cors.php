@@ -9,20 +9,30 @@ $app->add(function ($request, $handler) {
     $allowedSites = getenv('ALLOWED_SITES');
     $allowedSites = explode(',', $allowedSites);
 
-	if (in_array($_SERVER['HTTP_ORIGIN'], $allowedSites) === true) {
-	    $response = $response->withHeader(
-	    	'Access-Control-Allow-Origin',
-	    	$_SERVER['HTTP_ORIGIN']
-	    );
-	}
+    if (empty($allowedSites) === false) {
+        if (
+            isset($_SERVER['HTTP_ORIGIN']) === true &&
+            in_array($_SERVER['HTTP_ORIGIN'], $allowedSites) === true
+        ) {
+            $response = $response->withHeader(
+                'Access-Control-Allow-Origin',
+                $_SERVER['HTTP_ORIGIN']
+            );
+        } else if (count($allowedSites) === 1) {
+            $response = $response->withHeader(
+                'Access-Control-Allow-Origin',
+                $allowedSites[0]
+            );
+        }
 
-    return $response->withHeader(
-    	'Access-Control-Allow-Headers',
-    	'X-Requested-With, Content-Type, Accept, Origin, Authorization'
-    )->withHeader(
-    	'Access-Control-Allow-Methods',
-    	'GET, POST, PUT, DELETE, PATCH, OPTIONS'
-    );
+        return $response->withHeader(
+            'Access-Control-Allow-Headers',
+            'X-Requested-With, Content-Type, Accept, Origin, Authorization'
+        )->withHeader(
+            'Access-Control-Allow-Methods',
+            'GET, POST, PUT, DELETE, PATCH, OPTIONS'
+        );
+    }
 });
 
 
