@@ -10,7 +10,8 @@ class ContactValidator
     private static $messageMinLength = 3;
     private static $messageMaxLength = 500;
 
-    public function validate($params) {
+    public function validate($params)
+    {
         $name = $params['name'] ?? null;
         $email = $params['email'] ?? null;
         $message = $params['message'] ?? null;
@@ -30,7 +31,7 @@ class ContactValidator
 
         if (empty($email) === true) {
             $errors['email'] = 'Email is required';
-        } else if (filter_var($email, FILTER_VALIDATE_EMAIL) === true) {
+        } elseif (filter_var($email, FILTER_VALIDATE_EMAIL) === true) {
             $errors['email'] = 'Email address used is invalid';
         } else {
             $emailLength = strlen($email);

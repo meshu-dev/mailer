@@ -14,7 +14,8 @@ class CaptchaService
         $this->captchaSecretKey = $captchaSecretKey;
     }
 
-    public function verifyToken($token) {
+    public function verifyToken($token)
+    {
         $response = $this->httpClient->post(
             '/recaptcha/api/siteverify',
             [

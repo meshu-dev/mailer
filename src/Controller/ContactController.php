@@ -7,11 +7,13 @@ class ContactController
 {
     protected $container;
 
-    public function __construct(ContainerInterface $container) {
+    public function __construct(ContainerInterface $container)
+    {
         $this->container = $container;
     }
 
-    public function send($request, $response, $args) {
+    public function send($request, $response, $args)
+    {
         $params = $request->getParsedBody();
 
         $contactValidator = $this->container->get('ContactValidator');
