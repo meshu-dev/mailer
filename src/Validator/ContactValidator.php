@@ -1,15 +1,48 @@
 <?php
 namespace App\Validator;
 
+/**
+ * Validates contact e-mail data.
+ */
 class ContactValidator
 {
+    /**
+     * @var int
+     */
     private static $nameMinLength = 3;
+    
+    /**
+     * @var int
+     */
     private static $nameMaxLength = 100;
+    
+    /**
+     * @var int
+     */
     private static $emailMinLength = 5;
+    
+    /**
+     * @var int
+     */
     private static $emailMaxLength = 100;
+    
+    /**
+     * @var int
+     */
     private static $messageMinLength = 3;
+    
+    /**
+     * @var int
+     */
     private static $messageMaxLength = 500;
 
+    /**
+     * Validate the passed in parameters.
+     *
+     * @param array $params The parameters
+     *
+     * * @return array|bool The validation errors or true
+     */
     public function validate($params)
     {
         $name = $params['name'] ?? null;

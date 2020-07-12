@@ -1,11 +1,25 @@
 <?php
 namespace App\Service;
 
+/**
+ * Used for captcha services.
+ */
 class CaptchaService
 {
+    /**
+     * @var object
+     */
     protected $httpClient;
+    
+    /**
+     * @var string
+     */
     protected $captchaSecretKey;
 
+    /**
+     * @param object $httpClient HTTP Client to make requests
+     * @param string $captchaSecretKey Captcha secret key
+     */
     public function __construct(
         $httpClient,
         $captchaSecretKey
@@ -14,7 +28,14 @@ class CaptchaService
         $this->captchaSecretKey = $captchaSecretKey;
     }
 
-    public function verifyToken($token)
+    /**
+     * Verify the passed in captcha token.
+     *
+     * @param string $token The token
+     *
+     * @return bool Validation result
+     */
+    public function verifyToken($token): bool
     {
         $response = $this->httpClient->post(
             '/recaptcha/api/siteverify',

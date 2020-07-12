@@ -2,17 +2,37 @@
 namespace App\Controller;
 
 use Psr\Container\ContainerInterface;
+use Psr\Http\Message\ResponseInterface as Response;
+use Psr\Http\Message\ServerRequestInterface as Request;
 
+/**
+ * Used for contact us forms to send e-mails to recipients.
+ */
 class ContactController
 {
+    /**
+     * @var ContainerInterface
+     */
     protected $container;
 
+    /**
+     * @param ContainerInterface $container Container used for DI
+     */
     public function __construct(ContainerInterface $container)
     {
         $this->container = $container;
     }
 
-    public function send($request, $response, $args)
+    /**
+     * Used contact details to send e-mail to receiver.
+     *
+     * @param Request $request The request object
+     * @param Response $response The response object
+     * @param array $args The request parameters
+     *
+     * * @return Response The response object
+     */
+    public function send(Request $request, Response $response, array $args): Response
     {
         $params = $request->getParsedBody();
 

@@ -4,13 +4,37 @@ namespace App\Service;
 use App\Service\MailService;
 use App\Service\CaptchaService;
 
+/**
+ * Sends e-mails for contact us forms.
+ */
 class ContactService
 {
+    /**
+     * @var MailService
+     */
     protected $mailService;
+    
+    /**
+     * @var CaptchaService
+     */
     protected $captchaService;
+    
+    /**
+     * @var string
+     */
     protected $fromEmail;
+    
+    /**
+     * @var string
+     */
     protected $fromName;
 
+    /**
+     * @param MailService $mailService Mailer service
+     * @param CaptchaService $captchaService Captcha service
+     * @param string $fromEmail Sender e-mail address
+     * @param string $fromName Sender name
+     */
     public function __construct(
         MailService $mailService,
         CaptchaService $captchaService,
@@ -23,6 +47,16 @@ class ContactService
         $this->fromName = $fromName;
     }
 
+    /**
+     * Sends contact us e-mail message.
+     *
+     * @param string $subject The e-mail subject
+     * @param string $toEmail The to e-mail address
+     * @param string $message The e-mail message
+     * @param string $captchaToken The captcha token
+     *
+     * @return bool Indicates if the e-mail was sent
+     */
     public function sendEmail(
         $subject,
         $toEmail,
