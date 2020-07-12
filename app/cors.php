@@ -10,15 +10,14 @@ $app->add(function ($request, $handler) {
     $allowedSites = explode(',', $allowedSites);
 
     if (empty($allowedSites) === false) {
-        if (
-            isset($_SERVER['HTTP_ORIGIN']) === true &&
+        if (isset($_SERVER['HTTP_ORIGIN']) === true &&
             in_array($_SERVER['HTTP_ORIGIN'], $allowedSites) === true
         ) {
             $response = $response->withHeader(
                 'Access-Control-Allow-Origin',
                 $_SERVER['HTTP_ORIGIN']
             );
-        } else if (count($allowedSites) === 1) {
+        } elseif (count($allowedSites) === 1) {
             $response = $response->withHeader(
                 'Access-Control-Allow-Origin',
                 $allowedSites[0]
@@ -34,5 +33,3 @@ $app->add(function ($request, $handler) {
         );
     }
 });
-
-
