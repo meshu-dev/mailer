@@ -22,8 +22,7 @@ export async function POST(request: NextRequest) {
   let response: any = {};
 
   if (env === 'production') {
-    //sendEmail = await Recaptcha.isTokenValid(body.token);
-    sendEmail = true;
+    sendEmail = await Recaptcha.isTokenValid(body.token);
   } else {
     sendEmail = true;
   }
