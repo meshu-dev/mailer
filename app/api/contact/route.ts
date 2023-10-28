@@ -16,7 +16,7 @@ const getHeaders = () => {
   return {
     'Access-Control-Allow-Origin': process.env.ORIGIN_URLS || '',
     'Access-Control-Allow-Methods': 'POST, OPTIONS',
-    'Access-Control-Request-Headers': 'Content-Type'
+    'Access-Control-Request-Headers': 'Content-Type, x-requested-with'
   }
 }
 
