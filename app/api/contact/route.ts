@@ -12,6 +12,24 @@ export interface RequestParams {
   message: string
 }
 
+const getHeaders = () => {
+  return {
+    'Access-Control-Allow-Origin': process.env.ORIGIN_URLS || '',
+    'Access-Control-Allow-Methods': 'POST, OPTIONS',
+    'Access-Control-Request-Headers': 'Content-Type'
+  }
+}
+
+export const OPTIONS = async (request: NextRequest) => {
+  return NextResponse.json(
+    {},
+    {
+      status: 200,
+      headers: getHeaders()
+    }
+  )
+}
+
 export async function POST(request: NextRequest) {
   console.log('Contact API - Request received');
 
@@ -55,6 +73,9 @@ export async function POST(request: NextRequest) {
 
   return NextResponse.json(
     response,
-    { status: 200 }
-  );
+    {
+      status: 200,
+      headers: getHeaders()
+    }
+  )
 }
