@@ -13,9 +13,26 @@ export interface RequestParams {
   message: string
 }
 
+const getOrigin = (): string | null => {
+  const headersList = headers();
+  const origin: string | null = headersList.get('origin');
+
+  if (origin) {
+    const validOriginsStr: string = String(process.env.ORIGIN_URLS);
+    const validOrigins: string[]  = validOriginsStr.split(',');
+  
+    for (const validOrigin of validOrigins) {
+      if (origin === validOrigin) {
+        return validOrigin;
+      }
+    }
+  }
+  return null;
+}
+
 const getHeaders = () => {
   return {
-    'Access-Control-Allow-Origin': process.env.ORIGIN_URLS || '',
+    'Access-Control-Allow-Origin': getOrigin() || '',
     'Access-Control-Allow-Methods': 'POST, OPTIONS',
     'Access-Control-Allow-Headers': 'Content-Type'
   }
@@ -38,7 +55,9 @@ export async function POST(request: NextRequest) {
   console.log('headersList', headersList);
 
   const origin = headersList.get('origin')
-  console.log('origin', origin);
+  console.log('origin', origin, process.env.ORIGIN_URLS);
+
+  console.log('findOrigin', getOrigin());
 
   const env = process.env.NODE_ENV;
   const body: RequestParams = await request.json();
