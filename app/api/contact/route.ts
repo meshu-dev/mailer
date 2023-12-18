@@ -31,7 +31,7 @@ export const OPTIONS = async (request: NextRequest) => {
 }
 
 export async function POST(request: NextRequest) {
-  console.log('Contact API - Request received');
+  console.log('Contact API - Request received', request);
 
   const env = process.env.NODE_ENV;
   const body: RequestParams = await request.json();
