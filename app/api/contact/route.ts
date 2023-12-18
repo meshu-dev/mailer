@@ -37,6 +37,9 @@ export async function POST(request: NextRequest) {
   const headersList = headers()
   console.log('headersList', headersList);
 
+  const origin = headersList.get('origin')
+  console.log('origin', origin);
+
   const env = process.env.NODE_ENV;
   const body: RequestParams = await request.json();
 
