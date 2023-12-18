@@ -4,6 +4,7 @@ import Mailer from '../../lib/mailer';
 import Recaptcha from '../../lib/recaptcha';
 import { render } from '@react-email/render';
 import ContactEmail from '../../components/Email/ContactEmail';
+import { headers } from 'next/headers';
 
 export interface RequestParams {
   token: string,
@@ -32,6 +33,9 @@ export const OPTIONS = async (request: NextRequest) => {
 
 export async function POST(request: NextRequest) {
   console.log('Contact API - Request received', request);
+
+  const headersList = headers()
+  console.log('headersList', headersList);
 
   const env = process.env.NODE_ENV;
   const body: RequestParams = await request.json();
