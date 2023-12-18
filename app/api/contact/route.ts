@@ -51,14 +51,6 @@ export const OPTIONS = async (request: NextRequest) => {
 export async function POST(request: NextRequest) {
   console.log('Contact API - Request received', request);
 
-  const headersList = headers()
-  console.log('headersList', headersList);
-
-  const origin = headersList.get('origin')
-  console.log('origin', origin, process.env.ORIGIN_URLS);
-
-  console.log('findOrigin', getOrigin());
-
   const env = process.env.NODE_ENV;
   const body: RequestParams = await request.json();
 
